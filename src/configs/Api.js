@@ -7,21 +7,22 @@ export const endpoints = {
     'lessons': (courseId) => `/courses/${courseId}/lessons/`,
     'lesson-detail': (lessonId) => `/lessons/${lessonId}/`,
     'login': '/o/token/',
-    'current_user': '/users/current-user/',
+    'current_user': '/nguoi-dung/hien-tai/',
     'like-lesson': (lessonId) => `/lessons/${lessonId}/like/`,
     'rate-lesson': (lessonId) => `/lessons/${lessonId}/rating/`,
     'lesson-comments': (lessonId) => `/lessons/${lessonId}/comments/`,
     'comments': '/comments/',
-    'users': '/users/'
+    'users': '/nguoi-dung/',
+    "viec-lam": "/viec-lam/"
 }
 
 export const authAxios = () => axios.create({
-    baseURL: 'https://thanhduong.pythonanywhere.com/',
+    baseURL: 'http://127.0.0.1:8000/',
     headers: {
         'Authorization': `Bearer ${cookies.load('access_token')}`
     }
 })
 
 export default axios.create({
-    baseURL: 'https://thanhduong.pythonanywhere.com/'
+    baseURL: 'http://127.0.0.1:8000/'
 }) 

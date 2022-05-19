@@ -8,7 +8,8 @@ const Register = () => {
         "first_name": '',
         "last_name": '',
         "username": "",
-        "password": ""
+        "password": "",
+        "email": ""
     })
     const avatar = useRef()
     const nav = useNavigate()
@@ -29,6 +30,7 @@ const Register = () => {
         data.append('username', newUser.username)
         data.append('password', newUser.password)
         data.append('avatar', avatar.current.files[0])
+        data.append('email', newUser.email)
 
         try {
             const res = await Api.post(endpoints['users'], data, {
@@ -53,10 +55,18 @@ const Register = () => {
                 <Form.Control type="text" value={newUser.first_name} onChange={(evt) => change({'first_name': evt.target.value})} />
             </Form.Group>
 
+
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control type="text" value={newUser.last_name} onChange={(evt) => change({'last_name': evt.target.value})} />
             </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" value={newUser.email} onChange={(evt) => change({'email': evt.target.value})} />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="text" value={newUser.username} onChange={(evt) => change({'username': evt.target.value})} />
