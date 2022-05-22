@@ -39,13 +39,13 @@ const Header = () => {
     }
 
     let btn = <>
-        <Link to="/login" className="nav-link text-info">Dang nhap</Link>
-        <Link to="/register" className="nav-link text-danger">Dang ky</Link>
+        <Link to="/login" className="nav-link text-info">Đăng nhập</Link>
+        <Link to="/register" className="nav-link text-danger">Đăng xuất</Link>
     </>
     if (user != null) {
         btn = <>
-            <Link to="/" className="nav-link text-info">Welcome {user.username}!</Link>
-            <a href="#" onClick={logout} className="nav-link text-info">Dang xuat</a>
+            <Link to="/profile" className="nav-link text-info">Chào {user.username}!</Link>
+            <a href="#" onClick={logout} className="nav-link text-info">Đăng xuất</a>
         </>
     }
         
@@ -53,11 +53,11 @@ const Header = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           
-            <Navbar.Brand href="#home">e-Course Online</Navbar.Brand>
+            <Navbar.Brand href="#home">Mạng xã hội từ thiện</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    <Link to="/" className="nav-link">Trang chu</Link>
+                    <Link to="/" className="nav-link">Trang chủ</Link>
 
                     {categories.map(c => {
                         const url = `/?category_id=${c.id}`
@@ -70,7 +70,7 @@ const Header = () => {
                     <FormControl type="search" name="kw" value={kw}
                                  onChange={evt => setKw(evt.target.value)}
                                  placeholder="Nhap tu khoa" className="me-2" aria-label="Search" />
-                    <Button type="submit" variant="outline-success">Tim</Button>
+                    <Button type="submit" variant="outline-success">Tìm</Button>
                 </Form>
             </Navbar.Collapse>
            

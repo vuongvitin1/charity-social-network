@@ -6,13 +6,12 @@ export const endpoints = {
     'posts': '/posts/',
     "oauth2-info": "/oauth2-info/",
     'lessons': (postId) => `/posts/${postId}/lessons/`,
-    'lesson-detail': (lessonId) => `/lessons/${lessonId}/`,
+    'post-detail': (postId) => `/posts/${postId}/`,
     'login': '/o/token/',
-    'current_user': '/nguoi-dung/hien-tai/',
+    'current_user': '/users/current-user/',
     'like-lesson': (lessonId) => `/lessons/${lessonId}/like/`,
     'rate-lesson': (lessonId) => `/lessons/${lessonId}/rating/`,
-    'lesson-comments': (lessonId) => `/lessons/${lessonId}/comments/`,
-    'comments': '/comments/',
+    'comments': (postId) => `/posts/${postId}/comments/`,
     'register': '/users/',
     "viec-lam": "/viec-lam/"
 }

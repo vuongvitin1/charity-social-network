@@ -4,5 +4,8 @@ export const useStyles = makeStyles((theme) => ({
     pagination: {
         float: 'right',
         margin: 'auto',
+    },
+    spinner: {
+        textAlign: 'center',
     }
 }));

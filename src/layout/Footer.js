@@ -1,13 +1,18 @@
+import { Grid } from '@mui/material'
+import { Container } from '@mui/system'
 import React from 'react'
 import { Alert } from 'react-bootstrap'
 
 const Footer = () => {
     return (
-        <Alert variant="success">
-            <Alert.Heading>e-CourseApp Online</Alert.Heading>
-            <p>Duong Huu Thanh &copy; 2022</p>
-           
-        </Alert>
+        <Container>
+            <Grid xs={12}>
+                <Alert variant="success">
+                    <Alert.Heading>Website mạng xã hội từ thiện</Alert.Heading>
+                    <p>Trần Minh Vương - Lê Anh Du &copy; 2022</p>
+                </Alert>
+            </Grid>
+        </Container>
     )
 }
 

@@ -6,79 +6,79 @@ import { UserContext } from '../App'
 import Rating from 'react-rating'
 import Moment from 'react-moment'
 
-const LessonDetail = () => {
-    const [lesson, setLesson] = useState(null)
+const PostDetail = () => {
+    const [post, setPost] = useState(null)
     const [comments, setComments] = useState([])
-    const { lessonId } = useParams()
+    const { postId } = useParams()
     const [user] = useContext(UserContext)
     
 
     useEffect(() => {
-        const loadLesson = async () => {
+        const loadPost = async () => {
             let res = null;
             if (user != null) {
-                res = await authAxios().get(endpoints['lesson-detail'](lessonId))
+                res = await authAxios().get(endpoints['post-detail'](postId))
             } else {
-                res = await Api.get(endpoints['lesson-detail'](lessonId))
+                res = await Api.get(endpoints['post-detail'](postId))
             }
-            console.info(res.data)
-            setLesson(res.data)
+            // console.info(res.data)
+            setPost(res.data)
         }
 
-        loadLesson()
+        loadPost()
     }, [])
 
     useEffect(() => {
         const loadComments = async () => {
-            const res = await Api.get(endpoints['lesson-comments'](lessonId))
+            const res = await Api.get(endpoints['comments'](postId))
             setComments(res.data)
         }
 
         loadComments()
     }, [comments])
 
-    const like = async () => {
-        const res = await authAxios().post(endpoints['like-lesson'](lessonId))
-        setLesson(res.data)
-    }
+    // const like = async () => {
+    //     const res = await authAxios().post(endpoints['like-post'](postId))
+    //     setPost(res.data)
+    // }
 
-    const rate = async (r) => {
-        const res = await authAxios().post(endpoints['rate-lesson'](lessonId), {
-            'rate': r
-        })
-        console.info(res.data)
-        setLesson(res.data)
-    }
+    // const rate = async (r) => {
+    //     const res = await authAxios().post(endpoints['rate-post'](postId), {
+    //         'rate': r
+    //     })
+    //     console.info(res.data)
+    //     setPost(res.data)
+    // }
 
-    if (lesson === null)
+    if (post === null)
         return <Container><Spinner animation="grow" /></Container>
 
     return (
         <Container>
-            <h1 className="text-center text-info">CHI TIET BAI HOC ({lessonId})</h1>
+            <h1 className="text-center text-info">CHI TIET BAI HOC ({postId})</h1>
             <Row>
                 <Col md={5} xs={12}>
-                    <Image src={lesson.image} fluid />
+                    <Image src={post.image} fluid />
                 </Col>
                 <Col md={7} xs={12}>
-                    <h2>{lesson.subject}</h2>
-                    {lesson.tags.map(t => <Badge key={t.id} bg="info">{t.name}</Badge>)}
+                    <h2>{post.subject}</h2>
+                    {post.tags.map(t => <Badge key={t.id} bg="info">{t.name}</Badge>)}
 
-                    <div>
-                        {user != null && <Button variant={lesson.like == true?'primary':'outline-primary'} onClick={like}>Like</Button>}
+                    {/* <div>
+                        {user != null && <Button variant={post.like == true?'primary':'outline-primary'} onClick={like}>Like</Button>}
                         <br></br>
-                        {user != null && <Rating initialRating={lesson.rating} onClick={rate} />}
-                    </div>
+                        {user != null && <Rating initialRating={post.rating} onClick={rate} />}
+                    </div> */}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <div dangerouslySetInnerHTML={{__html: lesson.content}}></div>
+                    <div dangerouslySetInnerHTML={{__html: post.content}}></div>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    {user != null && <CommentForm lessonId={lessonId} comments={comments} setComments={setComments} />}
+                    {user != null && <CommentForm postId={postId} comments={comments} setComments={setComments} />}
                     <ListGroup>
                         {comments.map(c => <ListGroup.Item>
                             <Image src={c.user.avatar_view} fluid width="50" roundedCircle /> {c.content} - <Moment fromNow>{c.created_date}</Moment>
@@ -90,7 +90,7 @@ const LessonDetail = () => {
     )
 }
 
-const CommentForm = ({ lessonId, comments, setComments }) => {
+const CommentForm = ({ postId, comments, setComments }) => {
     const [content, setContent] = useState()
     const [user] = useContext(UserContext)
 
@@ -99,7 +99,7 @@ const CommentForm = ({ lessonId, comments, setComments }) => {
 
         const res = await authAxios().post(endpoints['comments'], {
             'content': content, 
-            'lesson': lessonId,
+            'post': postId,
             'user': user.id
         })
 
@@ -119,4 +119,4 @@ const CommentForm = ({ lessonId, comments, setComments }) => {
     )
 }
 
-export default LessonDetail
+export default PostDetail
