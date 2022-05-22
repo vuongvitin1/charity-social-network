@@ -33,7 +33,7 @@ const Register = () => {
         data.append('email', newUser.email)
 
         try {
-            const res = await Api.post(endpoints['users'], data, {
+            const res = await Api.post(endpoints['register'], data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -80,7 +80,7 @@ const Register = () => {
                 <Form.Control type="file" ref={avatar} />
             </Form.Group>
             <Button variant="primary" type="submit">
-                Dang ky
+                Đăng ký
             </Button>
             </Form>
         </Container>

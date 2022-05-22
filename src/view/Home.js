@@ -4,40 +4,39 @@ import { Row,  Spinner, Container } from 'react-bootstrap'
 import { useSearchParams } from 'react-router-dom'
 import Api, { endpoints } from '../configs/Api'
 import Item from '../layout/Item'
+import { useStyles } from './Home.style'
 
 
 
 const Home = () => {
-    const [courses, setCourses] = useState([])
+    const [post, setpost] = useState([])
     const [q] = useSearchParams()
     const [count,setCount] = useState(0)
+    const classes = useStyles();
 
 
     // chuyển trang
+
     const [pageOn, setPageOn] = useState(1);
-
-    const [jobs, setJobs] = useState([]);
-
-    const [pageJ, setPageJ] = useState(1);
-    const fetchJobs = async (value) => {
-        const _path = endpoints["viec-lam"] + (value ? `?page=${value}` : `?page=1`)
+    const fetchPosts = async (value) => {
+        const _path = endpoints["posts"] + (value ? `?page=${value}` : `?page=1`)
 
         Api.get(_path).then(res => {
-            setCourses(res.data.results)
+            setpost(res.data.results)
             setCount(res.data.count)
         })
     }
 
-    const handleChangePageJ = (event, value) => {
+    const handleChangePage = (event, value) => {
         console.info(value);
-        setPageJ(value);
-        fetchJobs(value);
+        setPageOn(value);
+        fetchPosts(value);
     };
    
 
 
     useEffect(() => {
-        const loadCourses = async () => {
+        const loadpost = async () => {
             let query = ""
             const cateId = q.get("category_id")
             if (cateId !== null)
@@ -49,12 +48,12 @@ const Home = () => {
             
             console.info(`${endpoints['viec-lam']}?${query}`)
             const res = await Api.get(`${endpoints['viec-lam']}?${query}`)
-            setCourses(res.data.results)
+            setpost(res.data.results)
             setCount(res.data.count)
             
             //Chuyen trang
             // const _path = endpoints["viec-lam"] + (value ? `?page=${value}` : `?page=1`)
-            // const res = await fetch("/courses.json")
+            // const res = await fetch("/post.json")
             // let data = await res.json()
 
             // const cateId = q.get("category_id")
@@ -65,10 +64,10 @@ const Home = () => {
             // if (kw != null)
             //     data = data.filter(d => d.subject.indexOf(kw) >= 0)
 
-            // setCourses(data)
+            // setpost(data)
         }
 
-        loadCourses()
+        loadpost()
     }, [q])
     // const paging = () => {
     //     <Pagination>
@@ -90,15 +89,15 @@ const Home = () => {
                     )} */}
             <h1 className="text-center text-danger">Các dự án kiêu gọi từ thiện</h1>
             <Grid item xs={12} >
-                <Pagination count={Math.ceil(count / 2)} page={pageOn} onChange={handleChangePageJ} size='large' />
+                <Pagination count={Math.ceil(count / 2)} page={pageOn} onChange={handleChangePage} size='large' />
             </Grid>
 
             
-            {courses.length === 0 && <Spinner animation="grow" />}
+            {post.length === 0 && <Spinner animation="grow" />}
             
             
             <Row>
-                {courses.map(c => <Item obj={c}  />)}
+                {post.map(c => <Item obj={c}  />)}
             </Row>
         </Container>
       

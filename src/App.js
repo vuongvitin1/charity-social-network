@@ -10,7 +10,7 @@ import cookies from 'react-cookies'
 import Register from './components/Register'
 import About from './components/About'
 import NotMatch from './components/NotMatch'
-import Home from './components/Home'
+import Home from './view/Home'
 
 export const UserContext = createContext()
 

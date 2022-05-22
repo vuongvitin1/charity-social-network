@@ -3,8 +3,9 @@ import cookies from 'react-cookies'
 
 export const endpoints = {
     'categories': '/categories/',
-    'courses': '/courses/',
-    'lessons': (courseId) => `/courses/${courseId}/lessons/`,
+    'posts': '/posts/',
+    "oauth2-info": "/oauth2-info/",
+    'lessons': (postId) => `/posts/${postId}/lessons/`,
     'lesson-detail': (lessonId) => `/lessons/${lessonId}/`,
     'login': '/o/token/',
     'current_user': '/nguoi-dung/hien-tai/',
@@ -12,7 +13,7 @@ export const endpoints = {
     'rate-lesson': (lessonId) => `/lessons/${lessonId}/rating/`,
     'lesson-comments': (lessonId) => `/lessons/${lessonId}/comments/`,
     'comments': '/comments/',
-    'users': '/nguoi-dung/',
+    'register': '/users/',
     "viec-lam": "/viec-lam/"
 }
 

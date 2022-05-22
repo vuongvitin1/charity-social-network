@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { UserContext } from '../App'
 import { Navigate } from 'react-router-dom'
-import Api, {endpoints, authAxios} from '../configs/Api'
+import Api, { endpoints, authAxios } from '../configs/Api'
 import cookies from 'react-cookies'
 
 const Login = () => {
@@ -16,17 +16,22 @@ const Login = () => {
 
         // lay token
         try {
+            // clearAuthLS();
+            const info = await Api.get(endpoints['oauth2-info']);
+            console.log(info)
             const res = await Api.post(endpoints['login'], {
-                'client_id': 'ym2NZ2Xe2iwdoFlEnY0ZFzjS41WOJN1WlqHSXFgy',
-                'client_secret': 'QtGDSjT44IsaxZ44znLb3xA5vW2jzaOzJN9rrv0V7njamjtT8AoaQ4JwRpUomVURN6fxwhz9EYkqODDyVQyoFnD4t3KZFf1w7LGku60XMB49aeREi4gY1Fmjk2ooH1hh',
+                'client_id': info.data.client_id,
+                'client_secret': info.data.client_secret,
                 'username': username,
                 'password': password,
-                'grant_type': 'password'
+                'grant_type': "password",
             })
-    
+
+            console.info(res.data.access_token)
+
             if (res.status === 200) {
                 cookies.save('access_token', res.data.access_token)
-    
+
                 // lay current user
                 const user = await authAxios().get(endpoints['current_user'])
                 cookies.save('current_user', user.data)
@@ -34,7 +39,7 @@ const Login = () => {
                     "type": "login",
                     "payload": user.data
                 })
-            } 
+            }
         } catch (error) {
             console.info(error)
             setErrMsg('Username hoac password KHONG chinh xac!!!')
