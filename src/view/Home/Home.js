@@ -6,8 +6,6 @@ import Api, { endpoints } from '../../configs/Api'
 import Item from '../../layout/Item'
 import { useStyles } from './Home.style'
 
-
-
 const Home = () => {
     const [post, setpost] = useState([])
     const [q] = useSearchParams()
@@ -43,7 +41,7 @@ const Home = () => {
         Api.get(_path).then(res => {
             setpost(res.data.results)
             setCount(res.data.count)
-            console.log(count)
+            // console.log(count)
         })
     }
 
@@ -71,9 +69,8 @@ const Home = () => {
                     {post.map(c => <Item obj={c}  />)}
                 </Row>
             </Grid>
-            
             <Grid item xs={12} >
-                <Pagination count={Math.ceil(count / 2)} page={pageOn} onChange={handleChangePage} className={classes.pagination} size='large' />
+                <Pagination count={Math.ceil(count / 6)} page={pageOn} onChange={handleChangePage} className={classes.pagination} size='large' />
             </Grid>
         </Container>
       

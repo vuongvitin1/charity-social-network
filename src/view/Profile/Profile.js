@@ -1,11 +1,13 @@
 import { Grid } from '@mui/material'
 import React, { useContext } from 'react'
 import { Card, Container, Spinner } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const Profile = () => { 
     const src = 'https://res.cloudinary.com/dwsyse8jk/image/upload/v1630359671/t02qq60zya71rmrg5gfe.jpg';
     const [user, dispatch] = useContext(UserContext)
+    console.log(user)
     return (
         <Container>
             <p className="text-center">
@@ -18,9 +20,10 @@ const Profile = () => {
                     </Card>
                 </Grid>
                 <Grid xs="8">
-                    <p>{user.first_name}</p>
-                    <p>{user.last_name}</p>
-                    <p>{user.email}</p>
+                    <p>Tên: {user.first_name}</p>
+                    <p>Email: {user.email}</p>
+                    <Link to="/add-post" className="btn btn-info m-2">Thêm bài viết</Link>
+                    <Link to="/" className="btn btn-danger m-2">Xóa bài viết</Link>
                 </Grid>
             </Grid>
             

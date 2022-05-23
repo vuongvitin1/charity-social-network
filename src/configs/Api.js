@@ -2,18 +2,19 @@ import axios from "axios";
 import cookies from 'react-cookies'
 
 export const endpoints = {
-    'categories': '/categories/',
     'posts': '/posts/',
     "oauth2-info": "/oauth2-info/",
-    'lessons': (postId) => `/posts/${postId}/lessons/`,
+    'post': (postId) => `/posts/${postId}/post/`,
     'post-detail': (postId) => `/posts/${postId}/`,
     'login': '/o/token/',
     'current_user': '/users/current-user/',
-    'like-lesson': (lessonId) => `/lessons/${lessonId}/like/`,
-    'rate-lesson': (lessonId) => `/lessons/${lessonId}/rating/`,
+    'like-posts': '/likes/',
     'comments': (postId) => `/posts/${postId}/comments/`,
     'register': '/users/',
-    "viec-lam": "/viec-lam/"
+    "add-comments": "/user-comments/",
+    "put-post": "/posts/posts_update/",
+    "tags": "/tags/",
+    "add-post": "/posts/"
 }
 
 export const authAxios = () => axios.create({

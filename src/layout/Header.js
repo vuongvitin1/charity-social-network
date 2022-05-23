@@ -11,7 +11,6 @@ const Header = () => {
     const [kw, setKw] = useState()
     const nav = useNavigate()
     const [user, dispatch] = useContext(UserContext)
-
     useEffect(() => {
         const loadCategories = async () => {
             let res = await Api.get(endpoints['categories'])
@@ -40,7 +39,7 @@ const Header = () => {
 
     let btn = <>
         <Link to="/login" className="nav-link text-info">Đăng nhập</Link>
-        <Link to="/register" className="nav-link text-danger">Đăng xuất</Link>
+        <Link to="/register" className="nav-link text-danger">Đăng ký</Link>
     </>
     if (user != null) {
         btn = <>
@@ -58,14 +57,9 @@ const Header = () => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                     <Link to="/" className="nav-link">Trang chủ</Link>
-
-                    {categories.map(c => {
-                        const url = `/?category_id=${c.id}`
-                        return <Link to={url} className="nav-link">{c.name}</Link>
-                    })}
-
                     {btn}
                 </Nav>
+                
                 <Form onSubmit={search} className="d-flex">
                     <FormControl type="search" name="kw" value={kw}
                                  onChange={evt => setKw(evt.target.value)}
