@@ -54,7 +54,6 @@ const Item = (props) => {
                     console.log("Like + 1 !")
                     setCheckLike(true)
                 }
-
             } catch (error) {
                 console.error(error)
             }
